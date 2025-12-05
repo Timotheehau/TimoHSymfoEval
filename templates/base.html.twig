@@ -24,6 +24,10 @@
                        href="{{ path('app_article_new') }}">Créer un article</a>
                 </li>
                 {% endif %}
+                <li class="nav-item">
+                <a class="nav-link {% if app.request.attributes.get('_route') == 'about' %}active{% endif %}" 
+                href="{{ path('about') }}">À propos</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 {% if app.user %}

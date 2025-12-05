@@ -1,0 +1,31 @@
+{# templates/about/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">À propos de MonProjet</h1>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Notre service</h5>
+            <p class="card-text">{{ info.service }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">À propos de l'auteur</h5>
+            <p class="card-text">{{ info.author }}</p>
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Objectif du projet</h5>
+            <p class="card-text">{{ info.goal }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
