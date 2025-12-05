@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un article{% endblock %}
+
+{% block body %}
+<h1>Créer un article</h1>
+
+{{ form_start(form, {'attr': {'class': 'mb-3'}}) }}
+    <div class="mb-3">
+        {{ form_label(form.title) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.title) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.content) }}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+        {{ form_errors(form.content) }}
+    </div>
+    <button class="btn btn-success">Enregistrer</button>
+{{ form_end(form) }}
+{% endblock %}
