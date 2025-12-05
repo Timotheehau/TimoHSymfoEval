@@ -5,6 +5,7 @@
 {% block body %}
 <div class="container mt-4">
     <h1 class="mb-4">Tous les articles</h1>
+
     <form method="get" action="{{ path('app_article_index') }}" class="mb-4">
         <div class="input-group">
             <input type="text" name="q" value="{{ searchTerm }}" class="form-control" placeholder="Rechercher un article...">
@@ -15,22 +16,37 @@
     {% if articles is empty %}
         <div class="alert alert-info">Aucun article pour le moment.</div>
     {% else %}
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="row g-4">
             {% for article in articles %}
-                <div class="col">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">{{ article.title }}</h5>
-                            <p class="card-text text-truncate" style="max-height: 6em;">{{ article.content|nl2br }}</p>
-                            <div class="mt-auto">
-                                <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-sm btn-primary">Voir</a>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
-                                    <form method="post" action="{{ path('app_article_delete', {'id': article.id}) }}" style="display:inline;" onsubmit="return confirm('Voulez-vous vraiment supprimer cet article ?');">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
-                                        <button class="btn btn-sm btn-danger">Supprimer</button>
-                                    </form>
-                                {% endif %}
+                <div class="col-12">
+                    <div class="card shadow-sm h-100">
+                        <div class="row g-0">
+                            {# Image à gauche #}
+                            <div class="col-md-4">
+                                <img src="{{ article.image ?: 'https://via.placeholder.com/150' }}" class="img-fluid rounded-start" alt="{{ article.title }}">
+                            </div>
+
+                            {# Contenu à droite #}
+                            <div class="col-md-8">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">{{ article.title }}</h5>
+                                    <p><strong>Gestation :</strong> {{ article.gestation }} H</p>
+                                    <p><strong>Humeur max :</strong> {{ article.humeurMax }}</p>
+                                    <p><strong>Humeur min :</strong> {{ article.humeurMin }}</p>
+                                    <p><strong>Énergie :</strong> {{ article.energie }}</p>
+                                    <p class="card-text text-truncate" style="max-height: 6em;">{{ article.content|nl2br }}</p>
+
+                                    <div class="mt-auto text-end">
+                                        <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-sm btn-primary">Voir</a>
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-sm btn-warning">Modifier</a>
+                                            <form method="post" action="{{ path('app_article_delete', {'id': article.id}) }}" style="display:inline;" onsubmit="return confirm('Voulez-vous vraiment supprimer cet article ?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+                                                <button class="btn btn-sm btn-danger">Supprimer</button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

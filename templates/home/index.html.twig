@@ -6,15 +6,15 @@
 <div class="container mt-4">
     <!-- Bannière de bienvenue -->
     <div class="jumbotron p-5 bg-light rounded-3 text-center mb-5">
-        <h1 class="display-5">Bienvenue sur MonProjet Symfony !</h1>
-        <p class="lead">Découvrez nos articles et partagez vos idées.</p>
+        <h1 class="display-5">Gestionnaire d'élevage Dofus</h1>
+        <p class="lead">Consultez toutes les infos liées à l'élevage sur Dofus</p>
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_article_new') }}" class="btn btn-success btn-lg mt-3">Créer un article</a>
         {% endif %}
     </div>
 
     <!-- Derniers articles -->
-    <h2 class="mb-4">Derniers articles</h2>
+    <h2 class="mb-4">Derniers ajouts</h2>
     {% if latestArticles is empty %}
         <div class="alert alert-info">Aucun article pour le moment.</div>
     {% else %}
