@@ -1,0 +1,45 @@
+{# templates/profile/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Mon profil</h1>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="card shadow-sm mb-4" style="max-width: 600px;">
+        <div class="card-body">
+            <h5 class="card-title">Informations personnelles</h5>
+            <p><strong>Email :</strong> {{ user.email }}</p>
+            <p><strong>Rôle :</strong> {{ user.roles|join(', ') }}</p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4" style="max-width: 600px;">
+        <div class="card-body">
+            <h5 class="card-title">Modifier le mot de passe</h5>
+            {{ form_start(passwordForm) }}
+                {{ form_row(passwordForm.plainPassword.first) }}
+                {{ form_row(passwordForm.plainPassword.second) }}
+                <button class="btn btn-primary mt-2">Mettre à jour</button>
+            {{ form_end(passwordForm) }}
+        </div>
+    </div>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="card shadow-sm mb-4" style="max-width: 600px;">
+            <div class="card-body">
+                <h5 class="card-title">Actions administrateur</h5>
+                <a href="{{ path('app_article_new') }}" class="btn btn-primary">Créer un article</a>
+                <a href="{{ path('app_article_index') }}" class="btn btn-secondary">Voir tous les articles</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
