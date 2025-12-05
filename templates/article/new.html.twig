@@ -3,19 +3,26 @@
 {% block title %}Créer un article{% endblock %}
 
 {% block body %}
-<h1>Créer un article</h1>
+<div class="container mt-4">
+    <h1>Créer un article</h1>
 
-{{ form_start(form, {'attr': {'class': 'mb-3'}}) }}
+    {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
     <div class="mb-3">
-        {{ form_label(form.title) }}
-        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-        {{ form_errors(form.title) }}
+        {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Titre de l\'article'}}) }}
+        {{ form_errors(form.title, {'attr': {'class': 'text-danger'}}) }}
     </div>
+
     <div class="mb-3">
-        {{ form_label(form.content) }}
-        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 5}}) }}
-        {{ form_errors(form.content) }}
+        {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 6, 'placeholder': 'Contenu de l\'article'}}) }}
+        {{ form_errors(form.content, {'attr': {'class': 'text-danger'}}) }}
     </div>
-    <button class="btn btn-success">Enregistrer</button>
-{{ form_end(form) }}
+
+    <button type="submit" class="btn btn-success">Enregistrer</button>
+    <a href="{{ path('app_article_index') }}" class="btn btn-secondary ms-2">Retour à la liste</a>
+
+    {{ form_end(form) }}
+</div>
 {% endblock %}

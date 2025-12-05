@@ -3,11 +3,13 @@ security:
         App\Entity\User:
             algorithm: auto
 
+
     providers:
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
+        # used to reload user from session & other features (e.g. switch_user)
 
     firewalls:
         dev:
@@ -22,7 +24,7 @@ security:
                 check_path: app_login
             logout:
                 path: app_logout
-                target: /
+                target: home
 
     access_control:
         # routes réservées aux admins

@@ -16,12 +16,20 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class ArticleController extends AbstractController
 {
     #[Route(name: 'app_article_index', methods: ['GET'])]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(Request $request, ArticleRepository $articleRepository): Response
     {
+        $searchTerm = $request->query->get('q', '');
+
+        $articles = $searchTerm
+            ? $articleRepository->search($searchTerm)
+            : $articleRepository->findAll();
+
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
+            'searchTerm' => $searchTerm, // <-- on passe la variable à Twig
         ]);
     }
+
 
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
@@ -40,7 +48,7 @@ final class ArticleController extends AbstractController
 
         return $this->render('article/new.html.twig', [
             'article' => $article,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
