@@ -10,14 +10,20 @@
 
     <div class="mb-3">
         {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': 'Titre de l\'article'}}) }}
-        {{ form_errors(form.title, {'attr': {'class': 'text-danger'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder': "Titre de l'article"}}) }}
+        {{ form_errors(form.title) }}
     </div>
 
     <div class="mb-3">
         {{ form_label(form.content, 'Contenu', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 6, 'placeholder': 'Contenu de l\'article'}}) }}
-        {{ form_errors(form.content, {'attr': {'class': 'text-danger'}}) }}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 6}}) }}
+        {{ form_errors(form.content) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.image, 'Image de l’article', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.image) }}
     </div>
 
     <button type="submit" class="btn btn-success">Enregistrer</button>
