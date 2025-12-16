@@ -18,6 +18,9 @@ class Article
 
     #[ORM\Column(type: 'text')]
     private ?string $content = null;
+    
+    #[ORM\Column(nullable: true)]
+    private ?int $generation = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $gestation = null;
@@ -40,6 +43,9 @@ class Article
     public function setTitle(string $title): self { $this->title = $title; return $this; }
     public function getContent(): ?string { return $this->content; }
     public function setContent(string $content): self { $this->content = $content; return $this; }
+
+    public function getGeneration(): ?int { return $this->generation; }
+    public function setGeneration(?int $generation): self { $this->generation = $generation; return $this; }
     public function getGestation(): ?int { return $this->gestation; }
     public function setGestation(?int $gestation): self { $this->gestation = $gestation; return $this; }
     public function getHumeurMax(): ?int { return $this->humeurMax; }

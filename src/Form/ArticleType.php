@@ -15,11 +15,17 @@ class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var Article $article */
-        $article = $options['data'];
+    /** @var Article $article */
+    $article = $options['data'];
 
-        // Contenu par défaut si création
-        $defaultContent = "gestation: \nhumeur_max: \nhumeur_min: \nenergie: \n";
+    $defaultContent = sprintf(
+        "generation: %s\ngestation: %s\nhumeur_max: %s\nhumeur_min: %s\nenergie: %s\n",
+        $article->getGeneration() ?? '',
+        $article->getGestation() ?? '',
+        $article->getHumeurMax() ?? '',
+        $article->getHumeurMin() ?? '',
+        $article->getEnergie() ?? ''
+    );
 
         $builder
             ->add('title', TextType::class)
@@ -27,7 +33,6 @@ class ArticleType extends AbstractType
             ->add('content', TextareaType::class, [
                 'data' => $article && $article->getId() ? $article->getContent() : $defaultContent,
             ])
-
             ->add('image', FileType::class, [
                 'mapped' => false,
                 'required' => false,

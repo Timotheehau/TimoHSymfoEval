@@ -24,7 +24,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ article.title }}</h5>
-                            <p class="card-text text-truncate" style="max-height: 6em;">{{ article.content|nl2br }}</p>
+                            <pre class="card-text">{{ article.content }}</pre>
                             <div class="mt-auto">
                                 <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-primary btn-sm">Voir</a>
                                 {% if is_granted('ROLE_ADMIN') %}
