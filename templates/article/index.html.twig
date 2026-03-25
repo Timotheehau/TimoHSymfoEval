@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tous les articles{% endblock %}
+{% block title %}Toutes les dragodindes{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-    <h1 class="mb-4">Tous les articles</h1>
+    <h1 class="mb-4">Toutes les dragodindes</h1>
 
     <form method="get" action="{{ path('app_article_index') }}" class="mb-4">
         <div class="input-group">
@@ -14,7 +14,7 @@
     </form>
 
     {% if articles is empty %}
-        <div class="alert alert-info">Aucun article pour le moment.</div>
+        <div class="alert alert-info">Aucune dragodindes pour le moment.</div>
     {% else %}
         <div class="row g-4">
             {% for article in articles %}
